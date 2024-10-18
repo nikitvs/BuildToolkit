@@ -167,9 +167,12 @@ function(__check_directories_exists__)
     # Для каждой директории
     foreach(__DIR__ ${${__PARSING_PREFIX__}_DIRS})
 
+        # Взять абсолютный путь к директории
+        get_filename_component(__PATH_TO_DIR__ "${__DIR__}" ABSOLUTE)
+
         # Проверить что директория существует
-        if (NOT IS_DIRECTORY "${__DIR__}")
-            message(FATAL_ERROR "Не существует директории: ${__DIR__}")
+        if (NOT IS_DIRECTORY "${__PATH_TO_DIR__}")
+            message(FATAL_ERROR "Не существует директории: ${__PATH_TO_DIR__}")
         endif()
 
     endforeach()
@@ -259,14 +262,14 @@ function(__collect_subdirectories__)
         set(__MAX_DEPTH__ "${${__PARSING_PREFIX__}_MAX_DEPTH}")
 
         # Проверить значение максимальной глубины
-        if(NOT ${__MAX_DEPTH__} MATCHES "^[0-9]+$")
+        if(NOT ${__MAX_DEPTH__} MATCHES "^(0|[1-9][0-9]*)$")
             message(FATAL_ERROR "Значение MAX_DEPTH должно быть целым беззнаковым числом: ${__MAX_DEPTH__}")
         endif()
 
         # Если еще не конец
         if(NOT ${__MAX_DEPTH__} EQUAL 0)
 
-            # Найти на этом уровне все файлы с директориями
+            # Найти на текущем уровне все файлы с директориями
             file(GLOB __SEARCH_RESULT__
                 LIST_DIRECTORIES true
                 ${__ROOT_DIR__}/*)
@@ -274,7 +277,7 @@ function(__collect_subdirectories__)
             # Уменьшить уровень глубины
             math(EXPR __REDUCED_MAX_DEPTH__ "${__MAX_DEPTH__} - 1")
 
-            # Для всех найденных файлов с директориями
+            # Для найденных файлов с директориями
             foreach(__ELEM__ ${__SEARCH_RESULT__})
 
                 # Если это директория
