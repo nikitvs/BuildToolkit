@@ -72,6 +72,14 @@ function(assign_qt_libs_to_target)
                          OPTIONAL_PARAMETERS "${__OPTIONAL_ONE_VALUE_ARGS__}"
                          EXCLUSIVE_FLAGS "${__EXCLUSIVE_MODIFIERS__}")
 
+    # Взять целевой таргет из аргумента
+    set(__TARGET__ "${${__PARSING_PREFIX__}_TARGET}")
+
+    # Проверить существование таргета
+    if (NOT TARGET "${__TARGET__}")
+        message(FATAL_ERROR "Не существует таргета: ${__TARGET__}")
+    endif()
+
     # Если задана версия
     if(DEFINED "${__PARSING_PREFIX__}_VERSION")
         # Взять версию из аргумента

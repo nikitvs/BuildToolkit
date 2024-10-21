@@ -51,6 +51,14 @@ function(assign_sources_to_target)
     # Проверить параметры функции
     __check_parameters__(PREFIX "${__PARSING_PREFIX__}" PARAMETERS "${___ONE_VALUE_ARGS____}" OPTIONAL_PARAMETERS "${__OPTIONAL_MULTIPLE_VALUE_ARGS__}")
 
+    # Взять целевой таргет из аргумента
+    set(__TARGET__ "${${__PARSING_PREFIX__}_TARGET}")
+
+    # Проверить существование таргета
+    if (NOT TARGET "${__TARGET__}")
+        message(FATAL_ERROR "Не существует таргета: ${__TARGET__}")
+    endif()
+
     # Если задан список директорий
     if(DEFINED "${__PARSING_PREFIX__}_SOURCE_DIRECTORIES")
 
