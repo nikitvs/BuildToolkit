@@ -142,7 +142,7 @@ endfunction()
 
     **Функция**::
 
-     __check_directories_exists__(DIRS <dir1> <dir2> ...)
+     __check_directories_existence__(DIRS <dir1> <dir2> ...)
 
     **Аргументы**
 
@@ -150,7 +150,7 @@ endfunction()
 
 #]====]
 
-function(__check_directories_exists__)
+function(__check_directories_existence__)
 
     # Задать префикс парсинга
     set(__PARSING_PREFIX__ "__DIRECTORIES_EXISTENCE_CHECKING_PREFIX__")
@@ -233,7 +233,7 @@ function(__collect_subdirectories__)
     set(__ROOT_DIR__ "${${__PARSING_PREFIX__}_DIRECTORY}")
 
     # Проверить существование исходной директории
-    __check_directories_exists__(DIRS "${__ROOT_DIR__}")
+    __check_directories_existence__(DIRS "${__ROOT_DIR__}")
 
     # Задать переменную для записи всех найденных файлов и директорий
     set(__RESULT__)

@@ -42,14 +42,14 @@ function(assign_sources_to_target)
     set(__PARSING_PREFIX__ "__SOURCES_ASSIGNMENT_PREFIX__")
 
     # Задать конфигурацию параметров парсинга
-    set(___ONE_VALUE_ARGS____ "TARGET")
+    set(__ONE_VALUE_ARGS__ "TARGET")
     set(__OPTIONAL_MULTIPLE_VALUE_ARGS__ "SOURCE_DIRECTORIES" "EXCLUSIVE_REGEXP")
 
     # Парсить параметры функции
-    cmake_parse_arguments("${__PARSING_PREFIX__}" "" "${___ONE_VALUE_ARGS____}" "${__OPTIONAL_MULTIPLE_VALUE_ARGS__}" "${ARGN}")
+    cmake_parse_arguments("${__PARSING_PREFIX__}" "" "${__ONE_VALUE_ARGS__}" "${__OPTIONAL_MULTIPLE_VALUE_ARGS__}" "${ARGN}")
 
     # Проверить параметры функции
-    __check_parameters__(PREFIX "${__PARSING_PREFIX__}" PARAMETERS "${___ONE_VALUE_ARGS____}" OPTIONAL_PARAMETERS "${__OPTIONAL_MULTIPLE_VALUE_ARGS__}")
+    __check_parameters__(PREFIX "${__PARSING_PREFIX__}" PARAMETERS "${__ONE_VALUE_ARGS__}" OPTIONAL_PARAMETERS "${__OPTIONAL_MULTIPLE_VALUE_ARGS__}")
 
     # Взять целевой таргет из аргумента
     set(__TARGET__ "${${__PARSING_PREFIX__}_TARGET}")
