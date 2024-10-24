@@ -73,7 +73,7 @@ function(assign_sources_to_target)
     endif()
 
     # Проверить что директории поиска существуют
-    __check_directories_exists__(DIRS "${__SEARCH_DIRECTORIES__}")
+    __check_directories_existence__(DIRS "${__SEARCH_DIRECTORIES__}")
 
     # Для всех директорий поиска
     foreach(__DIR__ ${__SEARCH_DIRECTORIES__})
@@ -171,7 +171,7 @@ function(assign_include_dirs_to_target)
         get_filename_component(__PATH_TO_DIR__ "${__DIR__}" ABSOLUTE)
 
         # Проверить существование директории
-        __check_directories_exists__(DIRS "${__PATH_TO_DIR__}")
+        __check_directories_existence__(DIRS "${__PATH_TO_DIR__}")
 
         # Собрать все поддиректории
         __collect_subdirectories__(DIRECTORY "${__PATH_TO_DIR__}" OUT_VAR __INCLUDE_DIRS__)
